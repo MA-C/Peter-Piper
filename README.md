@@ -1,4 +1,4 @@
-# Rocket Pipe Documentation #
+# Peter Piper Documentation #
 
 1. INTRODUCTION
 2. ECHOES
