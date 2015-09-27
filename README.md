@@ -2,7 +2,7 @@
 
 __1. INTRODUCTION__
 <br>
-This script was made as an alternative to legitimate authentication in Applescript. This script uses a method of exploitation in OS X  called root piping.
+This script was made as an alternative to legitimate authentication in Applescript. This script uses a method of exploitation in OS X called root piping.
 
 <br>
 
