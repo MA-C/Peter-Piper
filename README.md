@@ -39,7 +39,7 @@ This is used to ensure the completion of the command if it fails.
 <br>
 `sudo bash -c ` ___- Create a root bash shell___
 <br>
-`if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1);"` ___- Check if the exploit actually worked, if not, exit the script___
+`if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1)";` ___- Check if the exploit actually worked, if not, exit the script___
 <br>
 `sudo mkdir -v /tmp$$;` ___- Make a temporary directory to store the package in___
 <br>
