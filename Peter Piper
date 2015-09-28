@@ -6,8 +6,6 @@
 # Created by:
 # Patrick Hart & Zachery Rayburn
 
-# See README.md for documentation
-
 echo;echo
 echo -e '\033[1m ██▓███  ▓█████▄▄▄█████▓▓█████  ██▀███      ██▓███   ██▓ ██▓███  ▓█████  ██▀███  \033[0m'
 echo -e '\033[1m▓██░  ██▒▓█   ▀▓  ██▒ ▓▒▓█   ▀ ▓██ ▒ ██▒   ▓██░  ██▒▓██▒▓██░  ██▒▓█   ▀ ▓██ ▒ ██▒\033[0m'
