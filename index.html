@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Peter Piper : A simple Java 8 updater (bash script) for OS X made for Madison Academy. Makes use of the rootpipe exploit.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Peter Piper</title>
+    <meta charset="UTF-8">
+    <title>Peter Piper by MA-C</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Peter Piper</h1>
+      <h2 class="project-tagline">A simple Java 8 updater (bash script) for OS X made for Madison Academy. Makes use of the rootpipe exploit.</h2>
+      <a href="https://github.com/MA-C/Peter-Piper" class="btn">View on GitHub</a>
+      <a href="https://github.com/MA-C/Peter-Piper/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/MA-C/Peter-Piper/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/MA-C/Peter-Piper">View on GitHub</a>
-
-          <h1 id="project_title">Peter Piper</h1>
-          <h2 id="project_tagline">A simple Java 8 updater (bash script) for OS X made for Madison Academy. Makes use of the rootpipe exploit.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/MA-C/Peter-Piper/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/MA-C/Peter-Piper/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="peter-piper-documentation" class="anchor" href="#peter-piper-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Peter Piper Documentation</h1>
 
 <p><strong>1. INTRODUCTION</strong>
@@ -49,7 +37,7 @@ This exploit gives whatever user that executes it admin instantly.</p>
 
 <p><strong>3. INSTALL</strong>
 <br>
-We use <code>cURL</code> to get the Java 8 Update 60 package (.tar archive) onto the target computer and into a temporary directory, decompress it, and then use the <code>installer</code> command featured in the OS X command line to install the .pkg we fetched. This is the correct command for this particular task because it skips the graphical installer meaning it can run behind the scenes without target knowledge.</p>
+We use <code>cURL</code> to get the Java 8 Update 60 package onto the target computer and into a temporary directory, then the <code>installer</code> command featured in the OS X command line to install the .pkg we fetched. This is the correct command for this particular task because it skips the graphical installer meaning it can run behind the scenes without target knowledge.</p>
 
 <p><br></p>
 
@@ -78,27 +66,22 @@ This is used to ensure the completion of the command if it fails.</p>
 <br>
 <code>sudo mkdir -v /tmp$$;</code> <strong><em>- Make a temporary directory to store the package in</em></strong>
 <br>
-<code>sudo curl -# http://24.96.42.83/ownCloud/index.php/s/MipN60plXKZ21vg/download &gt; /tmp$$/Java8Update60.pkg.tar;</code> <strong><em>- Get the package (.tar archive)</em></strong>
+<code>sudo curl -# http://&lt;SERVER_ADDRESS&gt;/Java_8_Update_60.pkg &gt; /tmp$$/Java_8_Update_60.pkg;</code> <strong><em>- Get the package</em></strong>
 <br>
-<code>tar -xfv /tmp$$/Java8Update60.pkg.tar;</code> <strong><em>- Unpack the .tar archive</em></strong>
-<br>
-<code>sudo installer -verbose -pkg /tmp$$/Java8Update60.pkg -target LocalSystem;</code> - <strong><em>Install the package</em></strong>
+<code>sudo installer -verbose -pkg /tmp$$/Java_8_Update_60.pkg -target LocalSystem;</code> - <strong><em>Install the package</em></strong>
 <br>
 <code>sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers;</code> <strong><em>- Remove the line allowing root access without a password</em></strong>
 <br>
 <code>rm -rfv /tmp$$;</code> <strong><em>- Remove the temporary directory</em></strong></p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Peter Piper maintained by <a href="https://github.com/MA-C">MA-C</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/MA-C/Peter-Piper">Peter Piper</a> is maintained by <a href="https://github.com/MA-C">MA-C</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
