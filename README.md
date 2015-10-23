@@ -8,7 +8,9 @@ This script was made as an alternative to legitimate authentication in Applescri
 
 ### 2. EXPLOIT
 <br>
-This exploit uses a vulnerability that was properly fixed in OS X 10.10.5. It’s reference information is [here](https://www.sektioneins.de/en/blog/15-07-07-dyld_print_to_file_lpe.html).
+This script uses an exploit called rocket pipe for OSX 10.10.4 and below. It’s reference information is [here](https://www.sektioneins.de/en/blog/15-07-07-dyld_print_to_file_lpe.html).
+This exploit gives whatever user that executes it admin instantly.
+This script also uses an exploit called muymacho for OSX 10.10.5 only. It's reference information is [here] (https://luismiras.github.io/muymacho-exploiting_DYLD_ROOT_PATH/)
 This exploit gives whatever user that executes it admin instantly.
 
 <br>
